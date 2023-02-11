@@ -19,4 +19,4 @@ jobs:
         - name: Deploy GitHub Pages site
           uses: JamesIves/github-pages-deploy-action@v4
           with:
-            folder: release
+            folder: release/wwwroot
