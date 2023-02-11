@@ -1,0 +1,12 @@
+﻿@using FAKA.Client.Models
+
+<MudCard>
+    <MudCardHeader>
+        <CardHeaderContent>
+            <MudText Typo="Typo.h6">@Product.Name</MudText>
+        </CardHeaderContent>
+    </MudCardHeader>
+</MudCard>
+@code {
+    public Product? Product { get; set; }
+}
