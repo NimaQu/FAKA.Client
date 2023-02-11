@@ -16,6 +16,8 @@ jobs:
             dotnet-version: 7.0
         - name: Publish .NET Core Project
           run: dotnet publish FAKA.Client.csproj -c Release -o release --nologo
+        - name: download ssr 404 fix from github
+          run: wget -P release/wwwroot "https://raw.githubusercontent.com/rafgraph/spa-github-pages/gh-pages/404.html"
         - name: Deploy GitHub Pages site
           uses: JamesIves/github-pages-deploy-action@v4
           with:
