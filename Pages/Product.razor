@@ -58,7 +58,7 @@ else
 
     protected override async Task OnInitializedAsync()
     {
-        var response = await Http.GetFromJsonAsync<ProductGroupResponse>("api/ProductGroups");
+        var response = await Http.GetFromJsonAsync<ProductGroupResponse>("/api/v1/public/ProductGroups");
         ProductGroups = response?.Data;
         SelectedProductGroup = ProductGroups?.FirstOrDefault();
     }

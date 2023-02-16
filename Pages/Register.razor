@@ -1,0 +1,30 @@
+﻿@page "/Register"
+@using FAKA.Client.Models
+@using FAKA.Client.Shared.Components
+@using FAKA.Client.Auth
+@inject AuthenticationHttpClient Http
+
+<h3>注册</h3>
+<PageTitle>注册</PageTitle>
+
+<RegisterForm />
+
+@code {
+    private UserRegister registerDto = new();
+    private bool registering;
+    private bool succeeded;
+
+    private async Task OnValidSubmit()
+    {
+        registering = true;
+ 
+        var result = await Http.RegisterUser(registerDto);
+ 
+        if (result.code == 200)
+        {
+            succeeded = true;
+        }
+
+        registering = false;
+    }
+}

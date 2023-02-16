@@ -1,0 +1,47 @@
+﻿@using Microsoft.AspNetCore.Components
+@using FAKA.Client.Models
+@using FAKA.Client.Auth
+@inject AuthenticationHttpClient Http
+
+<EditForm Model="@registerDto" OnValidSubmit="OnValidSubmit">
+    <DataAnnotationsValidator/>
+    <MudGrid>
+        <MudItem xs="12" sm="7">
+            <MudCard>
+                <MudCardContent>
+                    <MudTextField Label="用户名" HelperText="Max. 8 characters"
+                                  @bind-Value="registerDto.Username" For="@(() => registerDto.Username)"/>
+                    <MudTextField Label="电子邮件地址" Class="mt-3"
+                                  @bind-Value="registerDto.Email" For="@(() => registerDto.Email)"/>
+                    <MudTextField Label="密码" HelperText="Choose a strong password" Class="mt-3"
+                                  @bind-Value="registerDto.Password" For="@(() => registerDto.Password)" InputType="InputType.Password"/>
+                    <MudTextField Label="确认密码" HelperText="Repeat the password" Class="mt-3"
+                                  @bind-Value="registerDto.Password2" For="@(() => registerDto.Password2)" InputType="InputType.Password"/>
+                </MudCardContent>
+                <MudCardActions>
+                    <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Filled" Color="Color.Primary" Class="ml-auto">注册</MudButton>
+                </MudCardActions>
+            </MudCard>
+        </MudItem>
+    </MudGrid>
+</EditForm>
+
+@code {
+    private UserRegister registerDto = new();
+    private bool registering;
+    private bool succeeded;
+ 
+    private async Task OnValidSubmit()
+    {
+        registering = true;
+ 
+        var result = await Http.RegisterUser(registerDto);
+ 
+        if (result.code == 200)
+        {
+            succeeded = true;
+        }
+
+        registering = false;
+    }
+}
